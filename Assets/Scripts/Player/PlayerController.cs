@@ -18,14 +18,29 @@ public class PlayerController : MonoBehaviour
     public bool grounded { get; private set; }
     private Vector2 input;
     private IComparer rayHitComparer;
-    private int collectedLights = 0;
 
-    public int GetLightsNum
+    private int collectedLights = 0;
+    private int health = 100;
+
+    public int LightsNum
     {
         get
         {
             return collectedLights;
         }
+    }
+
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        health -= damage;
     }
 
     void Awake()
