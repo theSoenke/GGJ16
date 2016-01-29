@@ -5,19 +5,28 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
-    public float speed = 8f;                                      
-    public float strafeSpeed = 4f;                                  
-    private float jumpPower = 5f;                                      
-    public bool walkByDefault = true;									
-    public float walkSpeed = 3f;                                     
+    public float speed = 8f;
+    public float strafeSpeed = 4f;
+    private float jumpPower = 5f;
+    public bool walkByDefault = true;
+    public float walkSpeed = 3f;
     public bool lockCursor = true;
 
 
-    private CapsuleCollider capsule;                                                    
-    private const float jumpRayLength = 0.7f;                                          
+    private CapsuleCollider capsule;
+    private const float jumpRayLength = 0.7f;
     public bool grounded { get; private set; }
     private Vector2 input;
     private IComparer rayHitComparer;
+    private int collectedLights = 0;
+
+    public int GetLightsNum
+    {
+        get
+        {
+            return collectedLights;
+        }
+    }
 
     void Awake()
     {
@@ -31,6 +40,16 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         Screen.lockCursor = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Light"))
+        {
+            Debug.Log("Collected light");
+            collectedLights++;
+            Destroy(other.gameObject);
+        }
     }
 
     void Update()
