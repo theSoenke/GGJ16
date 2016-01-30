@@ -660,7 +660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f68fecba2029b8478ed73ba9c83991f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movie: {fileID: 15200000, guid: b300037c358d2a846ba8427d85ea6786, type: 3}
+  _movie: {fileID: 15200000, guid: e523c53113c50314599df36d8fadb91f, type: 3}
+  videoDuration: 20
 --- !u!82 &824212856
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1378,17 +1379,6 @@ MonoBehaviour:
         m_CallState: 1
       - m_Target: {fileID: 824212855}
         m_MethodName: PlayMovie
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1800434909}
-        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

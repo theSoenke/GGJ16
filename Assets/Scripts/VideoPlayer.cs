@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class VideoPlayer : MonoBehaviour
 {
     public MovieTexture _movie;
+    public float videoDuration = 10f;
 
     private AudioSource _audio;
     private RawImage _image;
     private float _timer;
+    private bool videoStarted = false;
 
     void OnEnable()
     {
@@ -25,6 +28,8 @@ public class VideoPlayer : MonoBehaviour
         {
             _audio.clip = _movie.audioClip;
         }
+
+        _timer = videoDuration;
     }
 
     public void PlayMovie()
@@ -33,7 +38,8 @@ public class VideoPlayer : MonoBehaviour
         {
             _movie.Play();
             _audio.Play();
-            _timer = _movie.duration;
+            //_timer = _movie.duration;
+            videoStarted = true;
         }
     }
 
@@ -41,10 +47,9 @@ public class VideoPlayer : MonoBehaviour
     {
         _timer -= Time.deltaTime;
 
-        if (_timer <= 0)
+        if (_timer <= 0 && videoStarted)
         {
-            gameObject.SetActive(false);
-            Time.timeScale = 1;
+            AsyncOperation async = SceneManager.LoadSceneAsync("prototyp");
         }
     }
 }
