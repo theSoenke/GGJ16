@@ -5,6 +5,7 @@ public class ShadowControllerScript : MonoBehaviour
 {
     [Header("Behaviour")]
 
+    public float _viewRange;
     public float _targetRefreshRate;
     public float _flightDistance;
     public float _baseSpeed;
@@ -18,15 +19,12 @@ public class ShadowControllerScript : MonoBehaviour
     [Range(0, 1)]
     public float _sneakBaseChance;
     [Range(0, 1)]
-    public float _teleportBaseChance;
-    [Range(0, 1)]
     public float _frontalBaseChance;
     [Range(0, 1)]
     public float _chillBaseChance;
 
     float _rushChance;
     float _sneakChance;
-    float _teleportChance;
     float _frontalChance;
     float _chillChance;
 
@@ -41,9 +39,11 @@ public class ShadowControllerScript : MonoBehaviour
     public GameObject _player;                                                  // public is dummy
     Vector3 _playerViewDirection;
     NavMeshAgent _nma;
-    Vector3 _target;
+    GameObject _target;
 
     float _targetRefreshTimer;
+    bool _playerSeen = false;
+    float _behaviourChangeTimer;
 
 	
 	void Awake ()
@@ -52,77 +52,153 @@ public class ShadowControllerScript : MonoBehaviour
         _nma = GetComponent<NavMeshAgent>();
         _targetRefreshTimer = _targetRefreshRate;
         _playerViewDirection = _player.transform.forward;
-        _nma.speed = _baseSpeed;
+        Chill();
     }	
 	
 	void Update ()
     {
         RefreshNMA();
-	}
+        if (_playerSeen)
+        {
+            RefreshBehaviourChange();
+        }
+    }
+
+    void CheckDoesNoticePlayer()
+    {
+        if(Vector3.Distance(transform.position, _player.transform.position) <= _viewRange && !_playerSeen)
+        {
+            _playerSeen = true;
+            print("player seen");
+            CalculateBehaviour();           
+        }       
+    }
+
+    void RefreshBehaviourChange()
+    {
+        
+        if(_behaviourChangeTimer <= 0)
+        {
+            print("asdf");
+            CalculateBehaviour();
+        }
+        _behaviourChangeTimer -= Time.deltaTime;
+    }
 
     void RefreshNMA()
     {
         if (_targetRefreshTimer <= 0)
         {
-            _nma.SetDestination(_target);
+           
+            if(_target != null)
+                _nma.SetDestination(_target.transform.position);
+            CheckDoesNoticePlayer();
 
-
-            _targetRefreshTimer = _targetRefreshRate;
+            _targetRefreshTimer = _targetRefreshRate;          
         }
-        _targetRefreshRate -= Time.deltaTime;
+        _targetRefreshTimer -= Time.deltaTime;
+    }
+
+
+    void CalculatePropabilities()
+    {
+        float min = 0;
+        _rushChance = _rushBaseChance;
+        min += _rushChance - min;
+
+        _sneakChance = min + _sneakBaseChance;
+        min += _sneakChance - min;
+
+        _frontalChance = min + _frontalBaseChance;
+        min += _frontalChance - min;
+
+        _chillChance = min + _chillBaseChance;
+        min += _chillChance - min;
+
+        _rushChance /= min;
+        _sneakChance /= min;
+        _frontalChance /= min;
+        _chillChance /= min;
+        print("chill: " + _chillChance);
+        
+
     }
 
     void CalculateBehaviour()
-    {       
-        float ran = Random.Range(0, 5);
-        //if(ran <= )
+    {
+        CalculatePropabilities();
+        float ran = Random.value;      
+        if(ran <= _rushChance)
+        {
+            RushAttack();
+        }
+        else if(ran <= _sneakChance)
+        {
+            SneakAttack();
+        }      
+        else if (ran <= _frontalChance)
+        {
+            FrontalAttack();
+        }
+        else if (ran <= _chillChance)
+        {
+            Chill();
+        }
+        else
+        {
+            print("error: weightedRNG failure");
+        }
     }
 
     void Flee()
     {
         Vector3 fleeTo;
         fleeTo = (transform.position - _player.transform.position) * _flightDistance;
-        _target = fleeTo;
+        _target = null;
+        _nma.SetDestination( fleeTo);
         _nma.speed = _fleeSpeed;
         _currentBehaviour = Behaviour.flee;
+        _behaviourChangeTimer = 3 + Random.Range(0, 3);
     }
 
     void SneakAttack()
-    {
+    {      
         _nma.speed = _sneakSpeed;                                   //todo
         _currentBehaviour = Behaviour.sneakAttack;
+        _behaviourChangeTimer = 10 + Random.Range(0, 5);
     }
 
     void FrontalAttack()
     {
         _nma.speed = _baseSpeed;
-        _target = _player.transform.position;
+        _target = _player;
         _currentBehaviour = Behaviour.frontalAttack;
+        _behaviourChangeTimer = 20 + Random.Range(-5, 5);
     }
 
     void RushAttack()
     {
         _nma.speed = _rushSpeed;
-        _target = _player.transform.position;
+        _target = _player;
         _currentBehaviour = Behaviour.rushAttack;
+        _behaviourChangeTimer = 17 + Random.Range(-5, 5);
     }
 
     void Chill()
     {
-        _target = CreateRandomTarget();
+        _target = null;
+        _nma.SetDestination(CreateRandomTarget());
+        print(_nma.destination);
         _nma.speed = _baseSpeed;
         _currentBehaviour = Behaviour.chill;
-    }
-
-    void Teleport(Vector3 pos)
-    {
-        _nma.Warp(pos);
-        _currentBehaviour = Behaviour.teleport;
+        _behaviourChangeTimer = 7 + Random.Range(-1, 5);
     }
 
     Vector3 CreateRandomTarget()
     {
-        return new Vector3();                       //dummy
+        
+
+        return new Vector3(Random.Range(-50,50),0, Random.Range(-50, 50));                       //dummy
     }
     
 }
@@ -132,7 +208,7 @@ enum Behaviour
     chill = 0,
     frontalAttack = 1,
     rushAttack = 2,
-    sneakAttack = 3,
-    teleport = 4,
-    flee = 5
+    sneakAttack = 3,  
+    flee = 5,
+    idle = 6
 };
