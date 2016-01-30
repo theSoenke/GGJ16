@@ -178,7 +178,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void AttackPlayer()
     {
-        _playerScript.DamagePlayer(20);
+        _playerScript.DamagePlayer();
         Destroy(gameObject);
     }
 
@@ -248,9 +248,19 @@ public class ShadowControllerScript : MonoBehaviour
     Vector3 CreateRandomTarget()
     {
         Vector3 pos = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
-
+        int count = 0;
         while (UsefullStuff.InsideCollision(pos))
+        {
             pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
+            count++;
+            if(count >= 100)
+            {
+                print("failed position calculation");
+                CalculateBehaviour();
+                break;
+
+            }
+        }
 
         return pos;
     }

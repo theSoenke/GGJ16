@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityStandardAssets.ImageEffects;
 
 public class EffectManager : MonoBehaviour
@@ -24,6 +25,18 @@ public class EffectManager : MonoBehaviour
     public void SetColorCorrection(float saturation)
     {
         _colorCorrection.saturation = saturation;
+    }
+
+    IEnumerator BlurVision()
+    {
+        float duration = 2;
+
+        while (duration >= 0)
+        {
+
+            yield return null;
+        }
+        yield return null;
     }
 
     public void SetFishEyeEffect(bool enable)

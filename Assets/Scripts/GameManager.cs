@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
-	private int level = 0;
+	private int level = 1;
 	private int lightsLeft;
 	private GameObject[] lights;
-    public GameObject[] stages;
+    public GameObject[] stage;
 
-	void Start(){
+	void Start()
+    {
 		lights = GameObject.FindGameObjectsWithTag ("Light");
         instance = this;
 		spawnShadows(1);
@@ -19,35 +20,40 @@ public class GameManager : MonoBehaviour {
         player = PlayerController.Instance.gameObject;
 	}
 
-	void goDeeper(){
-		level++;
-		spawnShadows (3);
-		//darker
-		//creepyer
-		//shit der passiert, wenn deeper
-	}
+	void LightCollected()
+    {
+
+    }
+
+    void Degenerate()
+    {
+        stage[level].SetActive(false);
+        level++;
+        stage[level].SetActive(true);
+    }
+
+    
 
 
-
-	public void spawnShadows(int anzahl){
-		for(int i=0; i<anzahl;i++){
+	public void spawnShadows(int anzahl)
+    {
+		for(int i=0; i<anzahl;i++)
+        {
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 			Instantiate (shadow, spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation);
 		}
 	}
 
 
-	void Update () {
+	void Update ()
+    {
 		lights = GameObject.FindGameObjectsWithTag ("Light");
 		if (PlayerController.Instance.Health <= 0) {
 			//loose
 		}
-		if (lights.Length == 0) {
+		if (lights.Length == 0)
+        {
 			//win
-		}
-		if (lights.Length < lightsLeft) {
-			goDeeper ();
-			lightsLeft--;
-		}
+		}		
 	}
 }

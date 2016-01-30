@@ -5303,6 +5303,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 749626317}
   - 114: {fileID: 749626316}
+  - 114: {fileID: 749626318}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5325,7 +5326,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1171838111}
   - {fileID: 1284764941}
-  stages: []
+  stage: []
 --- !u!4 &749626317
 Transform:
   m_ObjectHideFlags: 0
@@ -5338,6 +5339,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &749626318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 749626315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f28965669447fb4d9b72a9860aaf724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1210793013}
 --- !u!1 &786857508
 GameObject:
   m_ObjectHideFlags: 0
@@ -7016,6 +7029,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 123493488}
   m_RootOrder: 0
+--- !u!20 &1210793013 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2045032, guid: 927684c399bc279418c09aae6dbd7999,
+    type: 2}
+  m_PrefabInternal: {fileID: 1332094724}
 --- !u!1 &1229511594
 GameObject:
   m_ObjectHideFlags: 0
@@ -7299,7 +7317,8 @@ Prefab:
       propertyPath: lightTrail
       value: 
       objectReference: {fileID: 182056, guid: 588ca0ef9636d064081bef32e77d6129, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11401726, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1359401333

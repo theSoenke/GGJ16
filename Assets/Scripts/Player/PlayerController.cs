@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private IComparer rayHitComparer;
 
     private int collectedLights = 0;
-    private int health = 100;
+    private int health = 8;
 
     public int LightsNum
     {
@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void DamagePlayer(int damage)
+    public void DamagePlayer()
     {
-        health -= damage;
+        health --;
     }
 
     void Awake()
