@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa9492bf661aee4590e1b976bf447d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadow: {fileID: 156420, guid: 4d8656d0b6dea1943a35a259065112de, type: 2}
+  shadow: {fileID: 116642, guid: bdc707f14c601714daa48875f9fa9ac8, type: 2}
   spawnPoints:
   - {fileID: 1171838111}
   - {fileID: 1284764941}
