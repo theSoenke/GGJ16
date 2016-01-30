@@ -3,8 +3,8 @@
 	Properties
 	{
 		_MainTex("Base (RGB)", 2D) = "white" {}
-		_subAmount("Substraction Amount", Range(-1, 1)) = 0
-		_mulAmount("Multiplication Amount", Range(1, 2)) = 1
+		_Brightness("Substraction Amount", Range(-0.5, 0.5)) = 0
+		_Contrast("Multiplication Amount", Range(0, 2)) = 0
 	}
 		SubShader
 		{
@@ -17,8 +17,8 @@
 				#include "UnityCG.cginc"
 
 				uniform sampler2D _MainTex;
-				uniform float _subAmount;
-				uniform float _mulAmount;
+				uniform float _Brightness;
+				uniform float _Contrast;
 
 				float4 frag(v2f_img i) : COLOR
 				{
@@ -27,11 +27,15 @@
 					
 					
 
-					float4 result;
-					result.r = c.r * _mulAmount - (_subAmount + _mulAmount);
-					result.g = c.g * _mulAmount - (_subAmount + _mulAmount);
-					result.b = c.b * _mulAmount - (_subAmount + _mulAmount);
-					return result;
+					// Apply contrast.
+					c.rgb = ((c.rgb - 0.5f) * max(_Contrast, 0)) + 0.5f;
+
+					// Apply brightness.
+					c.rgb += _Brightness;
+
+					// Return final pixel color.
+					c.rgb *= c.a;
+					return c;
 				}
 				ENDCG
 			}

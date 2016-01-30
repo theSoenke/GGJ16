@@ -9,7 +9,7 @@ public class DarkenImage : MonoBehaviour
 
     [Range(-1, 1)]
     public float _darken;
-    [Range(1, 2)]
+    [Range(0, 2)]
     public float _contrast;
 
     void Awake()
@@ -23,8 +23,8 @@ public class DarkenImage : MonoBehaviour
         {
             Graphics.Blit(source, destination);
         }
-        _material.SetFloat("_subAmount", _darken);
-        _material.SetFloat("_mulAmount", _contrast);
+        _material.SetFloat("_Brightness", _darken);
+        _material.SetFloat("_Contrast", _contrast);
         Graphics.Blit(source,  destination, _material);
     }
 

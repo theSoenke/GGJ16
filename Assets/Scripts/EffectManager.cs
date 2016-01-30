@@ -18,7 +18,7 @@ public class EffectManager : MonoBehaviour
     void Start()
     {
         SetFishEyeEffect(false);
-        SetColorCorrection(1f);
+        SetColorCorrection(0.5f);
     }
 
     public void SetColorCorrection(float saturation)
