@@ -36,7 +36,6 @@ public class ShadowControllerScript : MonoBehaviour
 
     [Header("Meta")]
 
-    public Mesh _worldHitbox;
     GameObject _player;
     PlayerController _playerScript;
     int _playerHealth;                                                
@@ -49,7 +48,7 @@ public class ShadowControllerScript : MonoBehaviour
     float _behaviourChangeTimer;
 
 	
-	void Awake ()
+	void Start ()
     {
         _player = PlayerController.Instance.gameObject;
         _playerScript = PlayerController.Instance;
@@ -234,8 +233,7 @@ public class ShadowControllerScript : MonoBehaviour
             pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
 
         return pos;                       
-    }
-    
+    }   
 }
 
 enum Behaviour
