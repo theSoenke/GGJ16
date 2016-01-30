@@ -81,9 +81,8 @@ public class ShadowControllerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("LightTrail"))
+        if (collider.CompareTag("LightBall"))
         {
-            // TODO freeze shadow?
             Flee();
             Debug.Log("Hit shadow");
         }

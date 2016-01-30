@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 424338}
   m_Layer: 0
   m_Name: Aura Light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: -6.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 424338}
@@ -130,12 +130,12 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 5.217964
   MaxDistance: 20
   Pan2D: 0
   rolloffMode: 2
@@ -147,10 +147,10 @@ AudioSource:
     m_Curve:
     - time: 0
       value: 1
-      inSlope: -2.5018518
-      outSlope: -2.5018518
+      inSlope: -3.1991844
+      outSlope: -3.1991844
       tangentMode: 0
-    - time: 1
+    - time: 0.9689119
       value: 0
       inSlope: -0.28534946
       outSlope: -0.28534946
@@ -162,7 +162,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -184,7 +184,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
