@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	private int level = 0;
 	private int lightsLeft;
 	private GameObject[] lights;
+    public GameObject[] stages;
 
 	void Start(){
 		lights = GameObject.FindGameObjectsWithTag ("Light");
