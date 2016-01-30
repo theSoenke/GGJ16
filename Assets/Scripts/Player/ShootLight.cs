@@ -19,7 +19,7 @@ public class ShootLight : MonoBehaviour
         GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
         Rigidbody trailRigidbody = trailGo.GetComponent<Rigidbody>();
 
-        Vector3 forceVector = weaponPosition.TransformDirection(weaponPosition.forward * lightSpeed);
+        Vector3 forceVector = Camera.main.transform.forward * lightSpeed;
         trailRigidbody.AddForce(forceVector);
     }
 }
