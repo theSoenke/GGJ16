@@ -36,7 +36,10 @@ public class ShadowControllerScript : MonoBehaviour
 
     [Header("Meta")]
 
-    public GameObject _player;                                                  // public is dummy
+    public Mesh _worldHitbox;
+    GameObject _player;
+    PlayerController _playerScript;
+    int _playerHealth;                                                
     Vector3 _playerViewDirection;
     NavMeshAgent _nma;
     GameObject _target;
@@ -48,10 +51,12 @@ public class ShadowControllerScript : MonoBehaviour
 	
 	void Awake ()
     {
-        // _player = PlayerControllerScript._controller.gameObject;        
+        _player = PlayerController.Instance.gameObject;
+        _playerScript = PlayerController.Instance;
         _nma = GetComponent<NavMeshAgent>();
         _targetRefreshTimer = _targetRefreshRate;
         _playerViewDirection = _player.transform.forward;
+        
         Chill();
     }	
 	
@@ -63,6 +68,15 @@ public class ShadowControllerScript : MonoBehaviour
             RefreshBehaviourChange();
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag.Equals("Player"))
+        {
+            AttackPlayer();
+        }
+    }
+
 
     void CheckDoesNoticePlayer()
     {
@@ -120,8 +134,7 @@ public class ShadowControllerScript : MonoBehaviour
         _frontalChance /= min;
         _chillChance /= min;
         print("chill: " + _chillChance);
-        
-
+       
     }
 
     void CalculateBehaviour()
@@ -149,6 +162,14 @@ public class ShadowControllerScript : MonoBehaviour
             print("error: weightedRNG failure");
         }
     }
+
+    void AttackPlayer()
+    {
+        _playerScript.DamagePlayer(20);
+        Destroy(gameObject);
+    }
+
+  
 
     void Flee()
     {
@@ -196,9 +217,12 @@ public class ShadowControllerScript : MonoBehaviour
 
     Vector3 CreateRandomTarget()
     {
+        Vector3 pos = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
         
+        while(UsefullStuff.InsideCollision(pos))
+            pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
 
-        return new Vector3(Random.Range(-50,50),0, Random.Range(-50, 50));                       //dummy
+        return pos;                       
     }
     
 }

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	private int lightsLeft;
 
 	void Start(){
-		spawnShadows(5);
+		spawnShadows(1);
 		lightsLeft = lights.Length;
 	}
 
