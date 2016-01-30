@@ -84,6 +84,7 @@ public class ShadowControllerScript : MonoBehaviour
         if (collider.CompareTag("LightTrail"))
         {
             // TODO freeze shadow?
+            Flee();
             Debug.Log("Hit shadow");
         }
     }
@@ -190,7 +191,7 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.SetDestination(fleeTo);
         _nma.speed = _fleeSpeed;
         _currentBehaviour = Behaviour.flee;
-        _behaviourChangeTimer = 3 + Random.Range(0, 3);
+        _behaviourChangeTimer = 10 + Random.Range(0, 5);
     }
 
     void SneakAttack()
