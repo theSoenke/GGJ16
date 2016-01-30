@@ -153,15 +153,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 414754, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.05
+      value: 0.031
       objectReference: {fileID: 0}
     - target: {fileID: 414754, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.97
+      value: 1.943
       objectReference: {fileID: 0}
     - target: {fileID: 414754, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.88
+      value: 2.86
       objectReference: {fileID: 0}
     - target: {fileID: 414754, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -182,6 +182,30 @@ Prefab:
     - target: {fileID: 414754, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199768, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148648, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19863276, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4294967039
+      objectReference: {fileID: 0}
+    - target: {fileID: 454858, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 454858, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 454858, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.199
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
@@ -572,6 +596,10 @@ Prefab:
     - target: {fileID: 400004, guid: 5bd242ad6a260224ea8e479a4623ae11, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 5bd242ad6a260224ea8e479a4623ae11, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bd242ad6a260224ea8e479a4623ae11, type: 3}
