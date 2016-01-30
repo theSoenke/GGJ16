@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 8f;
     public float strafeSpeed = 4f;
     private float jumpPower = 5f;
-    public bool walkByDefault = true;
     public float walkSpeed = 3f;
     public bool lockCursor = true;
 
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         bool jump = Input.GetButton("Jump");
 
         bool walkOrRun = Input.GetKey(KeyCode.LeftShift);
-        speed = walkByDefault ? (walkOrRun ? speed : walkSpeed) : (walkOrRun ? walkSpeed : speed);
+        float currentSpeed = walkOrRun ? speed : walkSpeed;
 
         input = new Vector2(horizontal, vertical);
 
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (input.sqrMagnitude > 1) input.Normalize();
 
         // Get a vector which is desired move as a world-relative direction, including speeds
-        Vector3 movement = transform.forward * input.y * speed + transform.right * input.x * strafeSpeed;
+        Vector3 movement = transform.forward * input.y * currentSpeed + transform.right * input.x * strafeSpeed;
 
         // preserving current y velocity (for falling, gravity)
         float yv = GetComponent<Rigidbody>().velocity.y;
