@@ -6,14 +6,19 @@ public class EffectManager : MonoBehaviour
 {
     public Camera playerCamera;
 
+    public AnimationCurve _blurTransitionCurve;
+
     private Fisheye _fisheye;
     private ColorCorrectionCurves _colorCorrection;
+    private Blur _blur;
+
 
 
     void Awake()
     {
         _fisheye = playerCamera.gameObject.GetComponent<Fisheye>();
         _colorCorrection = playerCamera.gameObject.GetComponent<ColorCorrectionCurves>();
+        _blur = playerCamera.gameObject.GetComponent<Blur>();
     }
 
     void Start()
@@ -27,13 +32,16 @@ public class EffectManager : MonoBehaviour
         _colorCorrection.saturation = saturation;
     }
 
+    public void StartBlurVision()
+    {
+        StartCoroutine(BlurVision());
+    }
     IEnumerator BlurVision()
     {
-        float duration = 2;
-
-        while (duration >= 0)
+        float startTime = Time.time;
+        while(Time.time - startTime < 3)
         {
-
+            _blur.iterations = Mathf.RoundToInt( _blurTransitionCurve.Evaluate(Time.time - startTime));
             yield return null;
         }
         yield return null;
@@ -51,4 +59,5 @@ public class EffectManager : MonoBehaviour
             _fisheye.enabled = false;
         }
     }
+
 }

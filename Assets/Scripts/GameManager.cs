@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    void Degenerate()
+    public void Degenerate()
     {
+        GetComponent<EffectManager>().StartBlurVision();
         stage[level].SetActive(false);
         level++;
         stage[level].SetActive(true);

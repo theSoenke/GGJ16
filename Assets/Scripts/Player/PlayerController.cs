@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer()
     {
         health --;
+        GameManager.instance.Degenerate();
     }
 
     void Awake()
