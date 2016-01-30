@@ -84,6 +84,7 @@ public class ShadowControllerScript : MonoBehaviour
         if (collider.CompareTag("LightBall"))
         {
             Flee();
+            Destroy(collider.gameObject);
             Debug.Log("Hit shadow");
         }
     }
