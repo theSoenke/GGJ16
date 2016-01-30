@@ -5,7 +5,6 @@ public class ShootLight : MonoBehaviour
     public GameObject lightTrail;
     public Transform weaponPosition;
     public float lightSpeed = 100f;
-    public float destructionTime = 5f;
 
     void Update()
     {
