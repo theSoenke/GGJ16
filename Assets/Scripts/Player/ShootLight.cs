@@ -1,0 +1,25 @@
+﻿using UnityEngine;
+
+public class ShootLight : MonoBehaviour
+{
+    public GameObject lightTrail;
+    public Transform weaponPosition;
+    public float lightSpeed = 100f;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ThrowLight();
+        }
+    }
+
+    private void ThrowLight()
+    {
+        GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
+        Rigidbody trailRigidbody = trailGo.GetComponent<Rigidbody>();
+
+        Vector3 forceVector = Camera.main.transform.forward * lightSpeed;
+        trailRigidbody.AddForce(forceVector);
+    }
+}

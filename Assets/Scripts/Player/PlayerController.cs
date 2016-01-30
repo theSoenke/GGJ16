@@ -5,12 +5,12 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
+    [Header("Movement")]
     public float speed = 8f;
     public float strafeSpeed = 4f;
     private float jumpPower = 5f;
     public float walkSpeed = 3f;
     public bool lockCursor = true;
-
 
     private CapsuleCollider capsule;
     private const float jumpRayLength = 0.7f;

@@ -69,6 +69,7 @@ public class ShadowControllerScript : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag.Equals("Player"))
@@ -78,6 +79,16 @@ public class ShadowControllerScript : MonoBehaviour
     }
 
 
+=======
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.CompareTag("LightTrail"))
+        {
+            // TODO freeze shadow
+        }
+    }
+
+>>>>>>> 4b09aa596d247723e7e8ff0f03ce5cfe9146a5e1
     void CheckDoesNoticePlayer()
     {
         if(Vector3.Distance(transform.position, _player.transform.position) <= _viewRange && !_playerSeen)
