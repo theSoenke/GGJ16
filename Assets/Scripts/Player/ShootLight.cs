@@ -5,6 +5,7 @@ public class ShootLight : MonoBehaviour
     public GameObject lightTrail;
     public Transform weaponPosition;
     public float lightSpeed = 100f;
+    public float lightTrailLifetime;
 
     void Update()
     {
@@ -21,5 +22,6 @@ public class ShootLight : MonoBehaviour
 
         Vector3 forceVector = Camera.main.transform.forward * lightSpeed;
         trailRigidbody.AddForce(forceVector);
+        Destroy(trailGo, lightTrailLifetime);
     }
 }
