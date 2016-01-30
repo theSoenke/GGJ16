@@ -69,13 +69,7 @@ public class ShadowControllerScript : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
-        {
-            AttackPlayer();
-        }
-    }
+   
 
 
 
@@ -88,7 +82,14 @@ public class ShadowControllerScript : MonoBehaviour
             Destroy(collider.gameObject);
             Debug.Log("Hit shadow");
         }
+        if (collider.gameObject.tag.Equals("Player"))
+        {
+            AttackPlayer();
+            print("player damaged");
+        }
     }
+
+
 
 
     void CheckDoesNoticePlayer()

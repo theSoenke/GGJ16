@@ -10,7 +10,7 @@ public class EffectManager : MonoBehaviour
 
     private Fisheye _fisheye;
     private ColorCorrectionCurves _colorCorrection;
-    private Blur _blur;
+    private BlurOptimized _blur;
 
 
 
@@ -18,7 +18,7 @@ public class EffectManager : MonoBehaviour
     {
         _fisheye = playerCamera.gameObject.GetComponent<Fisheye>();
         _colorCorrection = playerCamera.gameObject.GetComponent<ColorCorrectionCurves>();
-        _blur = playerCamera.gameObject.GetComponent<Blur>();
+        _blur = playerCamera.gameObject.GetComponent<BlurOptimized>();
     }
 
     void Start()
@@ -38,12 +38,14 @@ public class EffectManager : MonoBehaviour
     }
     IEnumerator BlurVision()
     {
+        _blur.enabled = true;
         float startTime = Time.time;
         while(Time.time - startTime < 3)
         {
-            _blur.iterations = Mathf.RoundToInt( _blurTransitionCurve.Evaluate(Time.time - startTime));
+            _blur.blurSize =  _blurTransitionCurve.Evaluate(Time.time - startTime);
             yield return null;
         }
+        _blur.enabled = false;
         yield return null;
     }
 
