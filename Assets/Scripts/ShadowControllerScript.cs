@@ -83,7 +83,8 @@ public class ShadowControllerScript : MonoBehaviour
     {
         if (collider.CompareTag("LightBall"))
         {
-            Flee();
+        
+            Chill();
             Destroy(collider.gameObject);
             Debug.Log("Hit shadow");
         }
@@ -185,9 +186,23 @@ public class ShadowControllerScript : MonoBehaviour
 
     void Flee()
     {
+
         Vector3 fleeTo;
-        fleeTo = (transform.position - _player.transform.position) * _flightDistance;
+        int tries = 1;
+        fleeTo = (_player.transform.position - transform.position ) * _flightDistance;     
+        while (UsefullStuff.InsideCollision(fleeTo))
+        {
+            fleeTo += new Vector3(Random.Range(-5, 5), Random.Range(-1, 2), Random.Range(-5, 5));
+            tries++;
+            if (tries >= 10)
+            {
+                GameManager.instance.spawnShadows(1);
+                Destroy(gameObject);
+            }
+        }
+        print("flee");
         _target = null;
+        print(fleeTo);
         _nma.SetDestination(fleeTo);
         _nma.speed = _fleeSpeed;
         _currentBehaviour = Behaviour.flee;
@@ -196,6 +211,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void SneakAttack()
     {
+        print("sneak");
         _nma.speed = _sneakSpeed;                                   //todo
         _currentBehaviour = Behaviour.sneakAttack;
         _behaviourChangeTimer = 10 + Random.Range(0, 5);
@@ -203,6 +219,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void FrontalAttack()
     {
+        print("frontal");
         _nma.speed = _baseSpeed;
         _target = _player;
         _currentBehaviour = Behaviour.frontalAttack;
@@ -211,6 +228,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void RushAttack()
     {
+        print("rush");
         _nma.speed = _rushSpeed;
         _target = _player;
         _currentBehaviour = Behaviour.rushAttack;
@@ -221,7 +239,7 @@ public class ShadowControllerScript : MonoBehaviour
     {
         _target = null;
         _nma.SetDestination(CreateRandomTarget());
-        print(_nma.destination);
+        print("chill");
         _nma.speed = _baseSpeed;
         _currentBehaviour = Behaviour.chill;
         _behaviourChangeTimer = 7 + Random.Range(-1, 5);
@@ -235,6 +253,12 @@ public class ShadowControllerScript : MonoBehaviour
             pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
 
         return pos;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_nma.destination, 5);
     }
 }
 

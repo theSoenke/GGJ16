@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	GameObject player;
+    public static GameManager instance;
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
 	private int level = 0;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
 	void Start(){
 		lights = GameObject.FindGameObjectsWithTag ("Light");
+        instance = this;
 		spawnShadows(1);
 		lightsLeft = lights.Length;
         player = PlayerController.Instance.gameObject;
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-	void spawnShadows(int anzahl){
+	public void spawnShadows(int anzahl){
 		for(int i=0; i<anzahl;i++){
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 			Instantiate (shadow, spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation);
