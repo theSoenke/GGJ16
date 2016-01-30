@@ -3,13 +3,14 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	public GameObject player;
-	public GameObject[] lights;
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
 	private int level = 0;
 	private int lightsLeft;
+	private GameObject[] lights;
 
 	void Start(){
+		lights = GameObject.FindGameObjectsWithTag ("Light");
 		spawnShadows(5);
 		lightsLeft = lights.Length;
 	}
@@ -33,14 +34,16 @@ public class GameManager : MonoBehaviour {
 
 
 	void Update () {
+		lights = GameObject.FindGameObjectsWithTag ("Light");
 		if (player.GetComponent<PlayerController>().Health == 0) {
 			//loose
 		}
+		if (lights.Length == 0) {
+			//win
+		}
 		if (lights.Length < lightsLeft) {
 			goDeeper ();
-		}
-		if (lightsLeft == 0) {
-			//win
+			lightsLeft--;
 		}
 	}
 }
