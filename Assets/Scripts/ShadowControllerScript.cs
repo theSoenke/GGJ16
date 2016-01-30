@@ -14,7 +14,7 @@ public class ShadowControllerScript : MonoBehaviour
     public float _sneakSpeed;
 
     [Header("Behaviour Propabilities")]
-    [Range(0,1)]
+    [Range(0, 1)]
     public float _rushBaseChance;
     [Range(0, 1)]
     public float _sneakBaseChance;
@@ -38,7 +38,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     GameObject _player;
     PlayerController _playerScript;
-    int _playerHealth;                                                
+    int _playerHealth;
     Vector3 _playerViewDirection;
     NavMeshAgent _nma;
     GameObject _target;
@@ -47,19 +47,19 @@ public class ShadowControllerScript : MonoBehaviour
     bool _playerSeen = false;
     float _behaviourChangeTimer;
 
-	
-	void Start ()
+
+    void Start()
     {
         _player = PlayerController.Instance.gameObject;
         _playerScript = PlayerController.Instance;
         _nma = GetComponent<NavMeshAgent>();
         _targetRefreshTimer = _targetRefreshRate;
         _playerViewDirection = _player.transform.forward;
-        
+
         Chill();
-    }	
-	
-	void Update ()
+    }
+
+    void Update()
     {
         RefreshNMA();
         if (_playerSeen)
@@ -71,7 +71,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player"))
         {
             AttackPlayer();
         }
@@ -81,27 +81,28 @@ public class ShadowControllerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("LightTrail"))
+        if (collider.CompareTag("LightTrail"))
         {
-            // TODO freeze shadow
+            // TODO freeze shadow?
+            Debug.Log("Hit shadow");
         }
     }
 
 
     void CheckDoesNoticePlayer()
     {
-        if(Vector3.Distance(transform.position, _player.transform.position) <= _viewRange && !_playerSeen)
+        if (Vector3.Distance(transform.position, _player.transform.position) <= _viewRange && !_playerSeen)
         {
             _playerSeen = true;
             print("player seen");
-            CalculateBehaviour();           
-        }       
+            CalculateBehaviour();
+        }
     }
 
     void RefreshBehaviourChange()
     {
-        
-        if(_behaviourChangeTimer <= 0)
+
+        if (_behaviourChangeTimer <= 0)
         {
             print("asdf");
             CalculateBehaviour();
@@ -113,12 +114,12 @@ public class ShadowControllerScript : MonoBehaviour
     {
         if (_targetRefreshTimer <= 0)
         {
-           
-            if(_target != null)
+
+            if (_target != null)
                 _nma.SetDestination(_target.transform.position);
             CheckDoesNoticePlayer();
 
-            _targetRefreshTimer = _targetRefreshRate;          
+            _targetRefreshTimer = _targetRefreshRate;
         }
         _targetRefreshTimer -= Time.deltaTime;
     }
@@ -144,21 +145,21 @@ public class ShadowControllerScript : MonoBehaviour
         _frontalChance /= min;
         _chillChance /= min;
         print("chill: " + _chillChance);
-       
+
     }
 
     void CalculateBehaviour()
     {
         CalculatePropabilities();
-        float ran = Random.value;      
-        if(ran <= _rushChance)
+        float ran = Random.value;
+        if (ran <= _rushChance)
         {
             RushAttack();
         }
-        else if(ran <= _sneakChance)
+        else if (ran <= _sneakChance)
         {
             SneakAttack();
-        }      
+        }
         else if (ran <= _frontalChance)
         {
             FrontalAttack();
@@ -179,21 +180,21 @@ public class ShadowControllerScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-  
+
 
     void Flee()
     {
         Vector3 fleeTo;
         fleeTo = (transform.position - _player.transform.position) * _flightDistance;
         _target = null;
-        _nma.SetDestination( fleeTo);
+        _nma.SetDestination(fleeTo);
         _nma.speed = _fleeSpeed;
         _currentBehaviour = Behaviour.flee;
         _behaviourChangeTimer = 3 + Random.Range(0, 3);
     }
 
     void SneakAttack()
-    {      
+    {
         _nma.speed = _sneakSpeed;                                   //todo
         _currentBehaviour = Behaviour.sneakAttack;
         _behaviourChangeTimer = 10 + Random.Range(0, 5);
@@ -228,12 +229,12 @@ public class ShadowControllerScript : MonoBehaviour
     Vector3 CreateRandomTarget()
     {
         Vector3 pos = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
-        
-        while(UsefullStuff.InsideCollision(pos))
+
+        while (UsefullStuff.InsideCollision(pos))
             pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
 
-        return pos;                       
-    }   
+        return pos;
+    }
 }
 
 enum Behaviour
@@ -241,7 +242,7 @@ enum Behaviour
     chill = 0,
     frontalAttack = 1,
     rushAttack = 2,
-    sneakAttack = 3,  
+    sneakAttack = 3,
     flee = 5,
     idle = 6
 };

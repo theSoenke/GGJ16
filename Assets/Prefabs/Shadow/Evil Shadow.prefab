@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 438626}
   - 114: {fileID: 11403012}
   - 195: {fileID: 19542098}
+  - 136: {fileID: 13682910}
   m_Layer: 0
   m_Name: Evil Shadow
   m_TagString: Untagged
@@ -111,6 +112,19 @@ MonoBehaviour:
   _sneakBaseChance: 0
   _frontalBaseChance: 1
   _chillBaseChance: 0.497
+--- !u!136 &13682910
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19542098
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -3229,6 +3243,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Height
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
