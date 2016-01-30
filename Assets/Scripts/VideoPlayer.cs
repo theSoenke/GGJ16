@@ -43,7 +43,8 @@ public class VideoPlayer : MonoBehaviour
 
         if (_timer <= 0)
         {
-            // TODO start game
+            gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }
