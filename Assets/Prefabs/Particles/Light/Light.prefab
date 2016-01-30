@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 430990}
-  - 82: {fileID: 8239560}
   m_Layer: 0
   m_Name: Light
   m_TagString: Light
@@ -25,6 +24,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 424338}
   - 136: {fileID: 13677766}
+  - 82: {fileID: 8202166}
   m_Layer: 0
   m_Name: Aura Light
   m_TagString: Light
@@ -117,12 +117,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 424338}
   m_RootOrder: 1
---- !u!82 &8239560
+--- !u!82 &8202166
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111618}
+  m_GameObject: {fileID: 141898}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24351854, guid: 58384285b2a86414e98cbaf1e35125f1,

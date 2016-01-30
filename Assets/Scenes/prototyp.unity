@@ -692,6 +692,10 @@ Prefab:
       propertyPath: lightTrail
       value: 
       objectReference: {fileID: 167314, guid: ad8928a224ff01c4c9695a7259ce7be2, type: 2}
+    - target: {fileID: 11496918, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
   m_IsPrefabParent: 0
