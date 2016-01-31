@@ -17,11 +17,16 @@ public class ShootLight : MonoBehaviour
 
     private void ThrowLight()
     {
-        GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
-        Rigidbody trailRigidbody = trailGo.GetComponent<Rigidbody>();
+        if (PlayerController.Instance.LightsNum > 0)
+        {
+            GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
+            Rigidbody trailRigidbody = trailGo.GetComponent<Rigidbody>();
 
-        Vector3 forceVector = Camera.main.transform.forward * lightSpeed;
-        trailRigidbody.AddForce(forceVector);
-        Destroy(trailGo, lightTrailLifetime);
+            Vector3 forceVector = Camera.main.transform.forward * lightSpeed;
+            trailRigidbody.AddForce(forceVector);
+            Destroy(trailGo, lightTrailLifetime);
+
+            PlayerController.Instance.UsedLight();
+        }
     }
 }

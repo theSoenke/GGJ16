@@ -13,17 +13,17 @@ public class OutroManager : MonoBehaviour
         {
             if (GameManager.instance.Won)
             {
-                outro.SetActive(true);
-                outroH.SetActive(false);
-
-                videoPlayer = outro.GetComponent<VideoPlayer>();
-            }
-            else
-            {
                 outro.SetActive(false);
                 outroH.SetActive(true);
 
                 videoPlayer = outroH.GetComponent<VideoPlayer>();
+            }
+            else
+            {
+                outro.SetActive(true);
+                outroH.SetActive(false);
+
+                videoPlayer = outro.GetComponent<VideoPlayer>();
             }
 
             videoPlayer.PlayMovie();

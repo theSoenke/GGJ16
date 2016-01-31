@@ -52,7 +52,7 @@ public class VideoPlayer : MonoBehaviour
             LoadScene();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Application.loadedLevelName == "Menu")
         {
             LoadScene();
         }

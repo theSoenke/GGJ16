@@ -595,7 +595,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 83c8df61f112e494dbcc28eca7fcf96e, type: 3}
-    m_FontSize: 60
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movie: {fileID: 15200000, guid: 55b8b29d7902a3f4badc40945727b1a4, type: 3}
-  videoDuration: 3
+  videoDuration: 43
 --- !u!82 &824212856
 AudioSource:
   m_ObjectHideFlags: 0
