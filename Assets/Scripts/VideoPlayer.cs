@@ -88,8 +88,10 @@ public class VideoPlayer : MonoBehaviour
     {
         if (!loadingStarted)
         {
-            SceneLoader.Instance.ClickAsync(levelToLoad);
-            loadingStarted = true;
+            SceneManager.LoadScene(levelToLoad);
+
+            //SceneLoader.Instance.ClickAsync(levelToLoad);
+            //loadingStarted = true;
         }
     }
 }
