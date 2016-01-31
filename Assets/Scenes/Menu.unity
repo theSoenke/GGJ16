@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movie: {fileID: 15200000, guid: 55b8b29d7902a3f4badc40945727b1a4, type: 3}
-  videoDuration: 3
+  videoDuration: 43
 --- !u!82 &824212856
 AudioSource:
   m_ObjectHideFlags: 0
