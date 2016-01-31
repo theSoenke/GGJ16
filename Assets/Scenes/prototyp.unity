@@ -187,7 +187,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 198806, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_TagString
@@ -258,6 +258,10 @@ Prefab:
     - target: {fileID: 454858, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0.199
+      objectReference: {fileID: 0}
+    - target: {fileID: 199768, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
@@ -401,6 +405,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 123493488}
   m_RootOrder: 4
+--- !u!1 &394194623 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 148648, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+  m_PrefabInternal: {fileID: 190968258}
+--- !u!65 &394194625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 394194623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 0, z: -1}
+--- !u!114 &394194626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 394194623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea7b6d10f0a4d74583478c451e3042f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateGo: {fileID: 638088200}
 --- !u!4 &446329400 stripped
 Transform:
   m_PrefabParentObject: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
@@ -425,6 +457,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1494756, y: 2.2610145, z: 5.520867}
   m_Center: {x: -0.014884409, y: 0.24244231, z: 2.6467535}
+--- !u!1 &638088200 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 199768, guid: ef348048a45f7dd498ad8218078e6bb0, type: 2}
+  m_PrefabInternal: {fileID: 190968258}
 --- !u!1001 &646140524
 Prefab:
   m_ObjectHideFlags: 0
@@ -434,15 +470,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 13
+      value: 12.12
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -6.7
+      value: -3.71
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1302,7 +1338,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198806, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_TagString
@@ -1444,7 +1480,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 198806, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_TagString
@@ -1633,7 +1669,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448914, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 198806, guid: 8a394fec723df744d94a86e23f73e5b3, type: 2}
       propertyPath: m_TagString
