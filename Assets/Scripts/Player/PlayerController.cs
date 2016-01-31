@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float jumpPower = 5f;
     public float walkSpeed = 3f;
     public bool lockCursor = true;
+    public int lightAmmo = 0;
     
 
     private CapsuleCollider capsule;
@@ -20,17 +21,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
     private IComparer rayHitComparer;
 
-
-    private int collectedLights = 0;
     private int health = 8;
-
     
 
     public int LightsNum
     {
         get
         {
-            return collectedLights;
+            return lightAmmo;
         }
     }
 
@@ -48,6 +46,11 @@ public class PlayerController : MonoBehaviour
         
         _aus.Play();
         GameManager.instance.Degenerate();
+    }
+
+    public void UsedLight()
+    {
+        lightAmmo -= 1;
     }
 
     void Awake()
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Light"))
         {
             Debug.Log("Collected light");
-            collectedLights++;
+            lightAmmo += 10;
             Destroy(other.gameObject);
         }
     }

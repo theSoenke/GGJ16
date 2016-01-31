@@ -47,6 +47,7 @@ GameObject:
   - 114: {fileID: 11423898}
   - 114: {fileID: 11498738}
   - 114: {fileID: 11423748}
+  - 114: {fileID: 11463902}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -69,11 +70,11 @@ GameObject:
   - 114: {fileID: 11478550}
   - 114: {fileID: 11496918}
   - 114: {fileID: 11474862}
-  - 114: {fileID: 11401726}
   - 114: {fileID: 11490004}
+  - 82: {fileID: 8279586}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -581,6 +582,81 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &8279586
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156068}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24382642, guid: 58384285b2a86414e98cbaf1e35125f1,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 11eb273be417b484898518aea5f71cbc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &8284772
 AudioSource:
   m_ObjectHideFlags: 1
@@ -813,18 +889,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128778}
   m_Enabled: 1
---- !u!114 &11401726
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f28965669447fb4d9b72a9860aaf724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 2045032}
 --- !u!114 &11423748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -862,6 +926,22 @@ MonoBehaviour:
   strengthX: 0.05
   strengthY: 0.05
   fishEyeShader: {fileID: 4800000, guid: 874ceab4425f64bccb1d14032f4452b1, type: 3}
+--- !u!114 &11463902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128778}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downsample: 2
+  blurSize: 0
+  blurIterations: 2
+  blurType: 0
+  blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
 --- !u!114 &11474862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -873,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7789f87c096e97d43a70fe8b5d46422f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightTrail: {fileID: 167314, guid: ad8928a224ff01c4c9695a7259ce7be2, type: 2}
+  lightTrail: {fileID: 182056, guid: 588ca0ef9636d064081bef32e77d6129, type: 2}
   weaponPosition: {fileID: 461264}
   lightSpeed: 1000
   lightTrailLifetime: 5
@@ -952,6 +1032,7 @@ MonoBehaviour:
   strafeSpeed: 4
   walkSpeed: 3
   lockCursor: 1
+  lightAmmo: 10
 --- !u!114 &11498738
 MonoBehaviour:
   m_ObjectHideFlags: 1
