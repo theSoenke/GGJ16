@@ -1608,6 +1608,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11496918, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
       propertyPath: speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496918, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: walkSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474862, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: durationBetweenShots
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -67,6 +67,17 @@ public class ShadowControllerScript : MonoBehaviour
     void Update()
     {
         RefreshBehaviourChange();
+        if(_targetRefreshTimer<=0 && _currentBehaviour != Behaviour.chill)
+        {
+            _nma.SetDestination(_player.transform.position);
+            _targetRefreshTimer = _targetRefreshRate;
+        }
+        _targetRefreshTimer -= Time.deltaTime;
+    }
+
+    private void refreshNMA()
+    {
+        
     }
 
     void OnTriggerEnter(Collider collider)
@@ -204,7 +215,7 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.speed = _baseSpeed;
         _nma.SetDestination(_player.transform.position);
         _currentBehaviour = Behaviour.frontalAttack;
-        _behaviourChangeTimer = 20 + Random.Range(-5, 5);
+        _behaviourChangeTimer = 20 + Random.Range(-5, 2);
     }
 
     void RushAttack()
@@ -213,7 +224,7 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.speed = _rushSpeed;
         _nma.SetDestination(_player.transform.position);
         _currentBehaviour = Behaviour.rushAttack;
-        _behaviourChangeTimer = 17 + Random.Range(-5, 5);
+        _behaviourChangeTimer = 5 + Random.Range(-3, 5);
     }
 
     void Chill()
@@ -222,27 +233,18 @@ public class ShadowControllerScript : MonoBehaviour
         print("chill");
         _nma.speed = _baseSpeed;
         _currentBehaviour = Behaviour.chill;
-        _behaviourChangeTimer = 7 + Random.Range(-1, 5);
+        _behaviourChangeTimer = 2 + Random.Range(0, 2);
 
     }
 
     Vector3 CreateRandomTarget()
     {
-        Vector3 pos = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
-        int count = 0;
-        while (UsefullStuff.InsideCollision(pos))
-        {
-            pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
-            count++;
-            if (count >= 100)
-            {
-                print("failed position calculation");
-                CalculateBehaviour();
-                break;
-            }
-        }
+        GameObject gm = (GameObject) GameObject.FindGameObjectWithTag("GameManager") ;
+        GameManager gmm = gm.GetComponent<GameManager>();
 
-        return pos;
+
+
+        return gmm.spawnPoints[Random.Range(0, gmm.spawnPoints.Length)].position;
     }
 
     void OnDrawGizmos()

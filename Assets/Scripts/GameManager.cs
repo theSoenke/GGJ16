@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         lights = new List<GameObject>();
-
-        spawnShadows(1);
+       
     }
 
     void Start()
@@ -68,6 +67,11 @@ public class GameManager : MonoBehaviour
             case 4: _slot[4].sprite = _img; break;
         }
         StartCoroutine(ShowUI());
+
+        if(_spawnedShadows.Count == 0)
+        {
+            spawnShadows(1);
+        }
         
         print(lightsLeft);
         lights.Remove(light);
@@ -120,7 +124,7 @@ public class GameManager : MonoBehaviour
         List<Transform> validSPs = new List<Transform>();
         foreach (Transform sp in spawnPoints)
         {
-            if (Vector3.Distance(sp.position, player.transform.position) >= 10)
+            if (Vector3.Distance(sp.position, player.transform.position) >= 20)
             {
                 validSPs.Add(sp);
             }

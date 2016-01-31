@@ -256,14 +256,14 @@ MonoBehaviour:
   _viewRange: 25
   _targetRefreshRate: 0.2
   _flightDistance: 30
-  _baseSpeed: 5
-  _rushSpeed: 7
+  _baseSpeed: 4
+  _rushSpeed: 6
   _fleeSpeed: 7
   _sneakSpeed: 4
-  _rushBaseChance: 0.468
+  _rushBaseChance: 1
   _sneakBaseChance: 0
   _frontalBaseChance: 1
-  _chillBaseChance: 0.497
+  _chillBaseChance: 0.2
   explosionEffect: {fileID: 133364, guid: bc06c0a4f98ca804db04996e032bc101, type: 2}
 --- !u!136 &13682910
 CapsuleCollider:
@@ -3482,6 +3482,22 @@ Prefab:
       propertyPath: explosionEffect
       value: 
       objectReference: {fileID: 133364, guid: bc06c0a4f98ca804db04996e032bc101, type: 2}
+    - target: {fileID: 0}
+      propertyPath: _baseSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _rushSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _rushBaseChance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _chillBaseChance
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116642}
