@@ -7,12 +7,19 @@ public class ShootLight : MonoBehaviour
     public float lightSpeed = 100f;
     public float lightTrailLifetime;
 
+    private AudioSource _shootAS;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             ThrowLight();
         }
+    }
+
+    void Awake()
+    {
+        _shootAS = GetComponents<AudioSource>()[3];
     }
 
     private void ThrowLight()

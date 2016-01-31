@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     GameObject player;
+
     public static GameManager instance;
+
+    public 
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
 	private int level = 1;
