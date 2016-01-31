@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader Instance;
+
     public Slider loadingBar;
     public GameObject loadingImage;
 
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public void ClickAsync(int level)
     {
@@ -15,30 +22,14 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadLevelWithBar(level));
     }
 
-    public void StartGame(int level)
-    {
-        ClickAsync(level);
-    }
-
-    public void LoadGame()
-    {
-        Time.timeScale = 0;
-        AsyncOperation async = SceneManager.LoadSceneAsync("prototyp");
-    }
-
     IEnumerator LoadLevelWithBar(int level)
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync(level);
+        AsyncOperation async = SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         while (!async.isDone)
         {
             loadingBar.value = async.progress;
             yield return null;
         }
-    }
-
-    public void EndGame()
-    {
-        Application.Quit();
     }
 }
 
