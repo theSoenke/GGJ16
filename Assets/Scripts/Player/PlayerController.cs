@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool grounded { get; private set; }
     private Vector2 input;
     private IComparer rayHitComparer;
+    private GameManager _gm;
 
 
     private int collectedLights = 0;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         capsule = GetComponent<Collider>() as CapsuleCollider;
         grounded = true;
         Screen.lockCursor = lockCursor;
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Collected light");
             collectedLights++;
+            _gm.LightCollected(other.gameObject);
             Destroy(other.gameObject);
         }
     }

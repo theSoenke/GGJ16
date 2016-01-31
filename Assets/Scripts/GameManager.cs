@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	public Transform[] spawnPoints;         
 	private int level = 1;
 	private int lightsLeft;
-	private GameObject[] lights;
+	private List<GameObject> lights;
     public GameObject[] stage;
     public int[] _stageBaseShadowCount;
     public List<GameObject> _spawnedShadows;
@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour {
 	void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+
+        lights = new List<GameObject>();
+
         instance = this;
 		spawnShadows(1) ;
 		
@@ -27,16 +29,18 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        lights = GameObject.FindGameObjectsWithTag("Light");
-        lightsLeft = lights.Length;
+        lights.AddRange( GameObject.FindGameObjectsWithTag("Light"));
+        lightsLeft = lights.Count;
 
     }
 
-	void LightCollected()
+	public void LightCollected(GameObject light)
     {                                               //todo
         lightsLeft--;
+        print(lightsLeft);
+        lights.Remove(light);
 
-        if(lightsLeft == 0)
+        if(lightsLeft <= 0 || lights.Count <= 0)
         {
             Win();
         }
