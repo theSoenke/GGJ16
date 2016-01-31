@@ -179,7 +179,7 @@ public class ShadowControllerScript : MonoBehaviour
 
     void AttackPlayer()
     {
-        _playerScript.DamagePlayer();
+        _playerScript.DamagePlayer();       
         Destroy(gameObject);
     }
 

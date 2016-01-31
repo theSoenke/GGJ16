@@ -7,17 +7,22 @@ public class SoundControllerScript : MonoBehaviour
     public float _fadeDuration;
     public AudioMixerSnapshot[] _channels;
     public int _currentTrack;
+    public static SoundControllerScript _instance;
 
-    void Start ()
+    void Awake ()
     {
         _currentTrack = 1;
-
+        _instance = this;
     }
 
     public void SwitchTrack(int nr)
     {
-        if(nr <= _channels.Length)
+        if (nr <= _channels.Length)
+        {
             _channels[nr - 1].TransitionTo(_fadeDuration);
+            _currentTrack++;
+        }
+        
     }
     
 	
