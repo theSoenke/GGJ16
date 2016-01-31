@@ -12,6 +12,7 @@ public class VideoPlayer : MonoBehaviour
     private RawImage _image;
     private float _timer;
     private bool videoStarted = false;
+    private bool loadingStarted = false;
 
     void OnEnable()
     {
@@ -38,7 +39,6 @@ public class VideoPlayer : MonoBehaviour
         {
             _movie.Play();
             _audio.Play();
-            //_timer = _movie.duration;
             videoStarted = true;
         }
     }
@@ -49,7 +49,21 @@ public class VideoPlayer : MonoBehaviour
 
         if (_timer <= 0 && videoStarted)
         {
-            AsyncOperation async = SceneManager.LoadSceneAsync("prototyp");
+            LoadScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadScene();
+        }
+    }
+
+    void LoadScene()
+    {
+        if (!loadingStarted)
+        {
+            SceneLoader.Instance.ClickAsync(1);
+            loadingStarted = true;
         }
     }
 }
