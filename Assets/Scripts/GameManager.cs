@@ -160,19 +160,4 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Outro", LoadSceneMode.Single);
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Win();
-            Debug.Log("cheater");
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Loose();
-            Debug.Log("cheater");
-        }
-    }
 }
