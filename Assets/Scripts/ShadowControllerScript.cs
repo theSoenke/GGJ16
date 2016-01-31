@@ -23,6 +23,9 @@ public class ShadowControllerScript : MonoBehaviour
     [Range(0, 1)]
     public float _chillBaseChance;
 
+    [Header("Effects")]
+    public GameObject explosionEffect;
+
     float _rushChance;
     float _sneakChance;
     float _frontalChance;
@@ -41,7 +44,7 @@ public class ShadowControllerScript : MonoBehaviour
     int _playerHealth;
     Vector3 _playerViewDirection;
     NavMeshAgent _nma;
-    
+
     AudioSource _pain;
 
     float _targetRefreshTimer;
@@ -62,16 +65,9 @@ public class ShadowControllerScript : MonoBehaviour
     }
 
     void Update()
-    {        
-
+    {
         RefreshBehaviourChange();
-        
     }
-
-
-   
-
-
 
     void OnTriggerEnter(Collider collider)
     {
@@ -79,7 +75,13 @@ public class ShadowControllerScript : MonoBehaviour
         {
             _pain.Play();
             Chill();
+
+            GameObject explosion = (GameObject)Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            ParticleSystem particle = explosion.GetComponent<ParticleSystem>();
+
             Destroy(collider.gameObject);
+            Destroy(explosion, particle.duration);
+
             Debug.Log("Hit shadow");
         }
         if (collider.gameObject.tag.Equals("Player"))
@@ -89,21 +91,14 @@ public class ShadowControllerScript : MonoBehaviour
         }
     }
 
-
-
-
-
     void RefreshBehaviourChange()
     {
-
         if (_behaviourChangeTimer <= 0)
-        {        
+        {
             CalculateBehaviour();
         }
         _behaviourChangeTimer -= Time.deltaTime;
     }
-   
-
 
     void CalculatePropabilities()
     {
@@ -157,36 +152,36 @@ public class ShadowControllerScript : MonoBehaviour
     void AttackPlayer()
     {
         _playerScript.DamagePlayer();
-        GameManager.instance._spawnedShadows.Remove(gameObject);    
+        GameManager.instance._spawnedShadows.Remove(gameObject);
         Destroy(gameObject);
     }
 
 
 
-/*    void Flee()
-    {
-
-        Vector3 fleeTo;
-        int tries = 1;
-        fleeTo = (_player.transform.position - transform.position ) * _flightDistance;     
-        while (UsefullStuff.InsideCollision(fleeTo))
+    /*    void Flee()
         {
-            fleeTo += new Vector3(Random.Range(-5, 5), Random.Range(-1, 2), Random.Range(-5, 5));
-            tries++;
-            if (tries >= 10)
+
+            Vector3 fleeTo;
+            int tries = 1;
+            fleeTo = (_player.transform.position - transform.position ) * _flightDistance;     
+            while (UsefullStuff.InsideCollision(fleeTo))
             {
-                GameManager.instance.spawnShadows(1);
-                Destroy(gameObject);
+                fleeTo += new Vector3(Random.Range(-5, 5), Random.Range(-1, 2), Random.Range(-5, 5));
+                tries++;
+                if (tries >= 10)
+                {
+                    GameManager.instance.spawnShadows(1);
+                    Destroy(gameObject);
+                }
             }
-        }
-        print("flee");
-        _target = null;
-        print(fleeTo);
-        _nma.SetDestination(fleeTo);
-        _nma.speed = _fleeSpeed;
-        _currentBehaviour = Behaviour.flee;
-        _behaviourChangeTimer = 10 + Random.Range(0, 5);
-    } */
+            print("flee");
+            _target = null;
+            print(fleeTo);
+            _nma.SetDestination(fleeTo);
+            _nma.speed = _fleeSpeed;
+            _currentBehaviour = Behaviour.flee;
+            _behaviourChangeTimer = 10 + Random.Range(0, 5);
+        } */
 
     void SneakAttack()
     {
@@ -207,7 +202,7 @@ public class ShadowControllerScript : MonoBehaviour
     {
         print("frontal");
         _nma.speed = _baseSpeed;
-        _nma.SetDestination(_player.transform.position);   
+        _nma.SetDestination(_player.transform.position);
         _currentBehaviour = Behaviour.frontalAttack;
         _behaviourChangeTimer = 20 + Random.Range(-5, 5);
     }
@@ -222,7 +217,7 @@ public class ShadowControllerScript : MonoBehaviour
     }
 
     void Chill()
-    {       
+    {
         _nma.SetDestination(CreateRandomTarget());
         print("chill");
         _nma.speed = _baseSpeed;
@@ -239,12 +234,11 @@ public class ShadowControllerScript : MonoBehaviour
         {
             pos = new Vector3(Random.Range(-60, 60), Random.Range(10, 15), Random.Range(-60, 60));
             count++;
-            if(count >= 100)
+            if (count >= 100)
             {
                 print("failed position calculation");
                 CalculateBehaviour();
                 break;
-
             }
         }
 
@@ -253,8 +247,11 @@ public class ShadowControllerScript : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_nma.destination, 5);
+        if (_nma != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_nma.destination, 5);
+        }
     }
 }
 
