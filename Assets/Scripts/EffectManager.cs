@@ -4,32 +4,38 @@ using UnityStandardAssets.ImageEffects;
 
 public class EffectManager : MonoBehaviour
 {
-    public Camera playerCamera;
+    public static EffectManager Instance;
 
+    public Camera playerCamera;
     public AnimationCurve _blurTransitionCurve;
+    public float colorSaturation = 1f;
 
     private Fisheye _fisheye;
-    private ColorCorrectionCurves _colorCorrection;
+    private ColorCorrectionCurves _colorSaturation;
     private BlurOptimized _blur;
-
-
 
     void Awake()
     {
+        Instance = this;
+
         _fisheye = playerCamera.gameObject.GetComponent<Fisheye>();
-        _colorCorrection = playerCamera.gameObject.GetComponent<ColorCorrectionCurves>();
+        _colorSaturation = playerCamera.gameObject.GetComponent<ColorCorrectionCurves>();
         _blur = playerCamera.gameObject.GetComponent<BlurOptimized>();
     }
 
     void Start()
     {
         SetFishEyeEffect(false);
-        SetColorCorrection(0.5f);
     }
 
-    public void SetColorCorrection(float saturation)
+    void Update()
     {
-        _colorCorrection.saturation = saturation;
+        _colorSaturation.saturation = colorSaturation;
+    }
+
+    public void SetSaturation(float saturation)
+    {
+        _colorSaturation.saturation = saturation;
     }
 
     public void StartBlurVision()
@@ -40,9 +46,9 @@ public class EffectManager : MonoBehaviour
     {
         _blur.enabled = true;
         float startTime = Time.time;
-        while(Time.time - startTime < 3)
+        while (Time.time - startTime < 3)
         {
-            _blur.blurSize =  _blurTransitionCurve.Evaluate(Time.time - startTime);
+            _blur.blurSize = _blurTransitionCurve.Evaluate(Time.time - startTime);
             yield return null;
         }
         _blur.enabled = false;
@@ -61,5 +67,4 @@ public class EffectManager : MonoBehaviour
             _fisheye.enabled = false;
         }
     }
-
 }
