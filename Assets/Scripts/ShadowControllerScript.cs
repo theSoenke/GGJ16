@@ -48,7 +48,7 @@ public class ShadowControllerScript : MonoBehaviour
     float _behaviourChangeTimer;
 
 
-    void Start()
+    void Awake()
     {
         _player = PlayerController.Instance.gameObject;
         _playerScript = PlayerController.Instance;
@@ -62,10 +62,9 @@ public class ShadowControllerScript : MonoBehaviour
     void Update()
     {
         RefreshNMA();
-        if (_playerSeen)
-        {
-            RefreshBehaviourChange();
-        }
+
+        RefreshBehaviourChange();
+        
     }
 
 
@@ -119,8 +118,7 @@ public class ShadowControllerScript : MonoBehaviour
         {
 
             if (_target != null)
-                _nma.SetDestination(_target.transform.position);
-            CheckDoesNoticePlayer();
+                _nma.SetDestination(_target.transform.position);           
 
             _targetRefreshTimer = _targetRefreshRate;
         }
@@ -179,13 +177,14 @@ public class ShadowControllerScript : MonoBehaviour
 
     void AttackPlayer()
     {
-        _playerScript.DamagePlayer();       
+        _playerScript.DamagePlayer();
+        GameManager.instance._spawnedShadows.Remove(gameObject);    
         Destroy(gameObject);
     }
 
 
 
-    void Flee()
+/*    void Flee()
     {
 
         Vector3 fleeTo;
@@ -208,7 +207,7 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.speed = _fleeSpeed;
         _currentBehaviour = Behaviour.flee;
         _behaviourChangeTimer = 10 + Random.Range(0, 5);
-    }
+    } */
 
     void SneakAttack()
     {
@@ -216,6 +215,13 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.speed = _sneakSpeed;                                   //todo
         _currentBehaviour = Behaviour.sneakAttack;
         _behaviourChangeTimer = 10 + Random.Range(0, 5);
+    }
+
+    public void Stun()
+    {
+        _nma.speed = 0;
+        _currentBehaviour = Behaviour.stuned;
+        _behaviourChangeTimer = 3.5f;
     }
 
     void FrontalAttack()
@@ -279,6 +285,6 @@ enum Behaviour
     frontalAttack = 1,
     rushAttack = 2,
     sneakAttack = 3,
-    flee = 5,
-    idle = 6
+    idle = 4,
+    stuned = 5
 };

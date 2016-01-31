@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         Screen.lockCursor = false;
+        
     }
 
     void OnTriggerEnter(Collider other)

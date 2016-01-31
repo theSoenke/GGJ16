@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	private GameObject[] lights;
     public GameObject[] stage;
     public int[] _stageBaseShadowCount;
+    public List<GameObject> _spawnedShadows;
 
 	void Awake()
     {
@@ -20,25 +21,44 @@ public class GameManager : MonoBehaviour {
         instance = this;
 		spawnShadows(1);
 		lightsLeft = lights.Length;
-        
-	}
+        _spawnedShadows = new List<GameObject>();
+
+    }
 
 	void LightCollected()
-    {
+    {                                               //todo
+        lightsLeft--;
 
+        if(lightsLeft == 0)
+        {
+            Win();
+        }
+        
     }
 
     public void Degenerate()
     {
-        GetComponent<EffectManager>().StartBlurVision();
-        stage[level - 1].SetActive(false);
-        level++;
-        stage[level - 1].SetActive(true);
-        spawnShadows(_stageBaseShadowCount[level - 1]);
-        SoundControllerScript._instance.SwitchTrack(SoundControllerScript._instance._currentTrack + 1);
+        if (level < stage.Length)
+        {
+            GetComponent<EffectManager>().StartBlurVision();
+            stage[level - 1].SetActive(false);
+            level++;
+            stage[level - 1].SetActive(true);
+            spawnShadows(_stageBaseShadowCount[level - 1]);
+            StunShadows();
+            SoundControllerScript._instance.SwitchTrack(SoundControllerScript._instance._currentTrack + 1);
+        }
+        else
+            Lose();
     }
 
-    
+    void StunShadows()
+    {
+        foreach(GameObject sh in _spawnedShadows)
+        {
+            sh.GetComponent<ShadowControllerScript>().Stun();
+        }
+    }
 
 
 	public void spawnShadows(int anzahl)
@@ -57,21 +77,24 @@ public class GameManager : MonoBehaviour {
             if (validSPs.Count <= 0)
                 break;
             int spawnPointIndex = Random.Range (0, validSPs.Count);
-			Instantiate (shadow, validSPs [spawnPointIndex].position, validSPs[spawnPointIndex].rotation);
+			_spawnedShadows.Add((GameObject) Instantiate (shadow, validSPs [spawnPointIndex].position, validSPs[spawnPointIndex].rotation));
             validSPs.RemoveAt(spawnPointIndex);           
 		}
 	}
 
+    void Lose()
+    {
+        print("NOOB");
+    }
+
+    void Win()
+    {
+
+    }
 
 	void Update ()
     {
-		lights = GameObject.FindGameObjectsWithTag ("Light");
-		if (PlayerController.Instance.Health <= 0) {
-			//loose
-		}
-		if (lights.Length == 0)
-        {
-			//win
-		}		
+		
+			
 	}
 }
