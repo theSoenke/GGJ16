@@ -1610,6 +1610,14 @@ Prefab:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11478550, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: dampingTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493398, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: dampingTime
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11401726, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
