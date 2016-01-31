@@ -19,13 +19,14 @@ public class ShootLight : MonoBehaviour
 
     void Awake()
     {
-        _shootAS = GetComponents<AudioSource>()[3];
+        _shootAS = GetComponents<AudioSource>()[2];
     }
 
     private void ThrowLight()
     {
         if (PlayerController.Instance.LightsNum > 0)
         {
+            _shootAS.Play();
             GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
             Rigidbody trailRigidbody = trailGo.GetComponent<Rigidbody>();
 
