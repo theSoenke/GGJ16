@@ -13,6 +13,8 @@ public class VideoPlayer : MonoBehaviour
     private float _timer;
     private bool videoStarted = false;
     private bool loadingStarted = false;
+    private int levelToLoad;
+    private bool loadLevel;
 
     void OnEnable()
     {
@@ -33,6 +35,18 @@ public class VideoPlayer : MonoBehaviour
         _timer = videoDuration;
     }
 
+    public bool Finished
+    {
+        get
+        {
+            if (videoStarted && _timer <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
     public void PlayMovie()
     {
         if (_movie != null)
@@ -43,16 +57,28 @@ public class VideoPlayer : MonoBehaviour
         }
     }
 
+    public void PlayMovieAndLoadScene(int level)
+    {
+        if (_movie != null)
+        {
+            _movie.Play();
+            _audio.Play();
+            videoStarted = true;
+            loadLevel = true;
+            levelToLoad = level;
+        }
+    }
+
     void Update()
     {
         _timer -= Time.deltaTime;
 
-        if (_timer <= 0 && videoStarted)
+        if (Finished && loadLevel)
         {
             LoadScene();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Application.loadedLevelName == "Menu")
+        if (Input.GetKeyDown(KeyCode.Space) && loadLevel)
         {
             LoadScene();
         }
@@ -62,7 +88,7 @@ public class VideoPlayer : MonoBehaviour
     {
         if (!loadingStarted)
         {
-            SceneLoader.Instance.ClickAsync(1);
+            SceneLoader.Instance.ClickAsync(levelToLoad);
             loadingStarted = true;
         }
     }
