@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
     {
-        player = PlayerController.Instance.gameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
         
         instance = this;
-		spawnShadows(1);
+		spawnShadows(1) ;
 		
         _spawnedShadows = new List<GameObject>();
 
