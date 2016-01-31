@@ -88,6 +88,7 @@ public class VideoPlayer : MonoBehaviour
     {
         if (!loadingStarted)
         {
+            _audio.Stop();
             SceneManager.LoadScene(levelToLoad);
 
             //SceneLoader.Instance.ClickAsync(levelToLoad);
