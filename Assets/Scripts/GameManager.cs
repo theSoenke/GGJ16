@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] stage;
     public int[] _stageBaseShadowCount;
     public List<GameObject> _spawnedShadows;
+    public GameObject _UI;
+    public Image[] _slot;
+    public Sprite _img;
 
     private GameObject player;
     private bool _gameOver;
@@ -53,8 +57,17 @@ public class GameManager : MonoBehaviour
     }
 
 	public void LightCollected(GameObject light)
-    {                                               //todo
+    {
         lightsLeft--;
+        switch (lightsLeft)
+        {
+            case 1 : _slot[1].sprite = _img; break;
+            case 2: _slot[2].sprite = _img; break;
+            case 3: _slot[3].sprite = _img; break;
+            case 4: _slot[4].sprite = _img; break;
+        }
+        StartCoroutine(ShowUI());
+        
         print(lightsLeft);
         lights.Remove(light);
 
@@ -62,6 +75,18 @@ public class GameManager : MonoBehaviour
         {
             Win();
         }
+    }
+
+    IEnumerator ShowUI()
+    {
+        float startTime = Time.time;
+        while (Time.time - startTime <= 2)
+        {
+            _UI.SetActive(true);
+            yield return null;
+        }
+        _UI.SetActive(false);
+        yield return null;
     }
 
     public void Degenerate()
