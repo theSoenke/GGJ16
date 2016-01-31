@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
-	GameObject player;
+public class GameManager : MonoBehaviour
+{
+    GameObject player;
     public static GameManager instance;
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
@@ -14,27 +16,46 @@ public class GameManager : MonoBehaviour {
     public int[] _stageBaseShadowCount;
     public List<GameObject> _spawnedShadows;
 
-	void Awake()
+    private bool _gameOver;
+    private bool _wonGame;
+
+    void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         lights = new List<GameObject>();
 
         instance = this;
-		spawnShadows(1) ;
-		
-        _spawnedShadows = new List<GameObject>();
-
+        spawnShadows(1);
+       
     }
 
     void Start()
     {
         lights.AddRange( GameObject.FindGameObjectsWithTag("Light"));
         lightsLeft = lights.Count;
-
     }
 
+
+    public bool Won
+    {
+        get
+        {
+            return _wonGame;
+        }
+    }
+
+    public bool GameOver
+    {
+        get
+        {
+            return _gameOver;
+        }
+    }
+
+
 	public void LightCollected(GameObject light)
+   
     {                                               //todo
         lightsLeft--;
         print(lightsLeft);
@@ -44,7 +65,7 @@ public class GameManager : MonoBehaviour {
         {
             Win();
         }
-        
+
     }
 
     public void Degenerate()
@@ -60,54 +81,72 @@ public class GameManager : MonoBehaviour {
             SoundControllerScript._instance.SwitchTrack(SoundControllerScript._instance._currentTrack + 1);
         }
         else
-            Lose();
+            Loose();
     }
 
     void StunShadows()
     {
-        foreach(GameObject sh in _spawnedShadows)
+        foreach (GameObject sh in _spawnedShadows)
         {
             sh.GetComponent<ShadowControllerScript>().Stun();
         }
     }
 
 
-	public void spawnShadows(int anzahl)
+    public void spawnShadows(int anzahl)
     {
         List<Transform> validSPs = new List<Transform>();
-        foreach(Transform sp in spawnPoints)
+        foreach (Transform sp in spawnPoints)
         {
-            if(Vector3.Distance(sp.position, player.transform.position) >= 10)
+            if (Vector3.Distance(sp.position, player.transform.position) >= 10)
             {
                 validSPs.Add(sp);
             }
         }
 
-		for(int i=0; i<anzahl;i++)
+        for (int i = 0; i < anzahl; i++)
         {
             if (validSPs.Count <= 0)
                 break;
-            int spawnPointIndex = Random.Range (0, validSPs.Count);
-			_spawnedShadows.Add((GameObject) Instantiate (shadow, validSPs [spawnPointIndex].position, validSPs[spawnPointIndex].rotation));
-            validSPs.RemoveAt(spawnPointIndex);           
-		}
-	}
+            int spawnPointIndex = Random.Range(0, validSPs.Count);
+            _spawnedShadows.Add((GameObject)Instantiate(shadow, validSPs[spawnPointIndex].position, validSPs[spawnPointIndex].rotation));
+            validSPs.RemoveAt(spawnPointIndex);
+        }
+    }
 
-    void Lose()
+    void Loose()
     {
         print("NOOB");
+        _gameOver = true;
+        _wonGame = false;
+        LoadOutro();
     }
 
     void Win()
     {
         print("Yay");
-        Application.Quit();
-        
+        _gameOver = true;
+        _wonGame = true;
+        LoadOutro();
     }
 
-	void Update ()
+    void LoadOutro()
     {
-		
-			
-	}
+        SceneManager.LoadScene("Outro", LoadSceneMode.Single);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Win();
+            Debug.Log("cheater");
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Loose();
+            Debug.Log("cheater");
+        }
+    }
 }
