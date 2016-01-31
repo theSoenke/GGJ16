@@ -17,11 +17,18 @@ public class GameManager : MonoBehaviour {
 	void Awake()
     {
         player = PlayerController.Instance.gameObject;
-        lights = GameObject.FindGameObjectsWithTag ("Light");
+        
         instance = this;
 		spawnShadows(1);
-		lightsLeft = lights.Length;
+		
         _spawnedShadows = new List<GameObject>();
+
+    }
+
+    void Start()
+    {
+        lights = GameObject.FindGameObjectsWithTag("Light");
+        lightsLeft = lights.Length;
 
     }
 
@@ -89,7 +96,9 @@ public class GameManager : MonoBehaviour {
 
     void Win()
     {
-
+        print("Yay");
+        Application.Quit();
+        
     }
 
 	void Update ()

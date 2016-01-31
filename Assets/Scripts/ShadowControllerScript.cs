@@ -250,6 +250,7 @@ public class ShadowControllerScript : MonoBehaviour
         _nma.speed = _baseSpeed;
         _currentBehaviour = Behaviour.chill;
         _behaviourChangeTimer = 7 + Random.Range(-1, 5);
+
     }
 
     Vector3 CreateRandomTarget()
