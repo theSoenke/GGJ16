@@ -870,6 +870,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  colorSaturation: 1
 --- !u!1 &786857508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1605,10 @@ Prefab:
     - target: {fileID: 156068, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496918, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11401726, guid: 927684c399bc279418c09aae6dbd7999, type: 2}
