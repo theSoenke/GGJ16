@@ -26,11 +26,12 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+
         player = GameObject.FindGameObjectWithTag("Player");
 
         lights = new List<GameObject>();
 
-        instance = this;
         spawnShadows(1);
     }
 
