@@ -264,6 +264,7 @@ MonoBehaviour:
   _sneakBaseChance: 0
   _frontalBaseChance: 1
   _chillBaseChance: 0.497
+  explosionEffect: {fileID: 133364, guid: bc06c0a4f98ca804db04996e032bc101, type: 2}
 --- !u!136 &13682910
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3477,6 +3478,10 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionEffect
+      value: 
+      objectReference: {fileID: 133364, guid: bc06c0a4f98ca804db04996e032bc101, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116642}

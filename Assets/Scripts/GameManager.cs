@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    GameObject player;
-
     public static GameManager instance;
-   
+
 	public GameObject shadow;
 	public Transform[] spawnPoints;         
 	private int level = 1;
@@ -18,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int[] _stageBaseShadowCount;
     public List<GameObject> _spawnedShadows;
 
+    private GameObject player;
     private bool _gameOver;
     private bool _wonGame;
 
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         spawnShadows(1);
-       
     }
 
     void Start()
@@ -37,7 +35,6 @@ public class GameManager : MonoBehaviour
         lights.AddRange( GameObject.FindGameObjectsWithTag("Light"));
         lightsLeft = lights.Count;
     }
-
 
     public bool Won
     {
@@ -55,9 +52,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
 	public void LightCollected(GameObject light)
-   
     {                                               //todo
         lightsLeft--;
         print(lightsLeft);
@@ -67,7 +62,6 @@ public class GameManager : MonoBehaviour
         {
             Win();
         }
-
     }
 
     public void Degenerate()
