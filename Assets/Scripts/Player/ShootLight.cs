@@ -6,8 +6,10 @@ public class ShootLight : MonoBehaviour
     public Transform weaponPosition;
     public float lightSpeed = 100f;
     public float lightTrailLifetime;
+    public float durationBetweenShots = 1f;
 
     private AudioSource _shootAS;
+    private float _cooldown;
 
     void Update()
     {
@@ -15,6 +17,8 @@ public class ShootLight : MonoBehaviour
         {
             ThrowLight();
         }
+
+        _cooldown -= Time.deltaTime;
     }
 
     void Awake()
@@ -24,7 +28,7 @@ public class ShootLight : MonoBehaviour
 
     private void ThrowLight()
     {
-        if (PlayerController.Instance.LightsNum > 0)
+        if (_cooldown <= 0)
         {
             _shootAS.Play();
             GameObject trailGo = (GameObject)Instantiate(lightTrail, weaponPosition.position, Quaternion.identity);
@@ -34,7 +38,11 @@ public class ShootLight : MonoBehaviour
             trailRigidbody.AddForce(forceVector);
             Destroy(trailGo, lightTrailLifetime);
 
-            PlayerController.Instance.UsedLight();
+            _cooldown = durationBetweenShots;
+        }
+        else
+        {
+            // TODO play sound
         }
     }
 }
