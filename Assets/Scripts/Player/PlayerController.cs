@@ -11,15 +11,20 @@ public class PlayerController : MonoBehaviour
     private float jumpPower = 5f;
     public float walkSpeed = 3f;
     public bool lockCursor = true;
+    
 
     private CapsuleCollider capsule;
+    private AudioSource _aus;
     private const float jumpRayLength = 0.7f;
     public bool grounded { get; private set; }
     private Vector2 input;
     private IComparer rayHitComparer;
 
+
     private int collectedLights = 0;
     private int health = 8;
+
+    
 
     public int LightsNum
     {
@@ -40,6 +45,8 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer()
     {
         health --;
+        
+        _aus.Play();
         GameManager.instance.Degenerate();
     }
 
@@ -50,6 +57,7 @@ public class PlayerController : MonoBehaviour
         grounded = true;
         Screen.lockCursor = lockCursor;
         rayHitComparer = new RayHitComparer();
+        _aus = GetComponent<AudioSource>();
     }
 
     void OnDisable()

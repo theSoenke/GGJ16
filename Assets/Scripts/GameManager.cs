@@ -26,15 +26,17 @@ public class GameManager : MonoBehaviour
         instance = this;
         spawnShadows(1);
 
-        _spawnedShadows = new List<GameObject>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
+        spawnShadows(1);
+
+        _spawnedShadows = new List<GameObject>();
     }
 
     void Start()
     {
         lights = GameObject.FindGameObjectsWithTag("Light");
         lightsLeft = lights.Length;
-
     }
 
     public bool Won
@@ -128,7 +130,6 @@ public class GameManager : MonoBehaviour
 
     void LoadOutro()
     {
-        Time.timeScale = 0;
         SceneManager.LoadScene("Outro", LoadSceneMode.Single);
     }
 

@@ -41,7 +41,8 @@ public class ShadowControllerScript : MonoBehaviour
     int _playerHealth;
     Vector3 _playerViewDirection;
     NavMeshAgent _nma;
-    GameObject _target;
+    
+    AudioSource _pain;
 
     float _targetRefreshTimer;
     bool _playerSeen = false;
@@ -50,18 +51,18 @@ public class ShadowControllerScript : MonoBehaviour
 
     void Awake()
     {
-        _player = PlayerController.Instance.gameObject;
-        _playerScript = PlayerController.Instance;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerScript = _player.GetComponent<PlayerController>();
         _nma = GetComponent<NavMeshAgent>();
         _targetRefreshTimer = _targetRefreshRate;
         _playerViewDirection = _player.transform.forward;
+        _pain = GetComponents<AudioSource>()[1];
 
         Chill();
     }
 
     void Update()
-    {
-        RefreshNMA();
+    {        
 
         RefreshBehaviourChange();
         
@@ -76,7 +77,7 @@ public class ShadowControllerScript : MonoBehaviour
     {
         if (collider.CompareTag("LightBall"))
         {
-        
+            _pain.Play();
             Chill();
             Destroy(collider.gameObject);
             Debug.Log("Hit shadow");
@@ -91,39 +92,17 @@ public class ShadowControllerScript : MonoBehaviour
 
 
 
-    void CheckDoesNoticePlayer()
-    {
-        if (Vector3.Distance(transform.position, _player.transform.position) <= _viewRange && !_playerSeen)
-        {
-            _playerSeen = true;
-            print("player seen");
-            CalculateBehaviour();
-        }
-    }
 
     void RefreshBehaviourChange()
     {
 
         if (_behaviourChangeTimer <= 0)
-        {
-            print("asdf");
+        {        
             CalculateBehaviour();
         }
         _behaviourChangeTimer -= Time.deltaTime;
     }
-
-    void RefreshNMA()
-    {
-        if (_targetRefreshTimer <= 0)
-        {
-
-            if (_target != null)
-                _nma.SetDestination(_target.transform.position);           
-
-            _targetRefreshTimer = _targetRefreshRate;
-        }
-        _targetRefreshTimer -= Time.deltaTime;
-    }
+   
 
 
     void CalculatePropabilities()
@@ -228,7 +207,7 @@ public class ShadowControllerScript : MonoBehaviour
     {
         print("frontal");
         _nma.speed = _baseSpeed;
-        _target = _player;
+        _nma.SetDestination(_player.transform.position);   
         _currentBehaviour = Behaviour.frontalAttack;
         _behaviourChangeTimer = 20 + Random.Range(-5, 5);
     }
@@ -237,14 +216,13 @@ public class ShadowControllerScript : MonoBehaviour
     {
         print("rush");
         _nma.speed = _rushSpeed;
-        _target = _player;
+        _nma.SetDestination(_player.transform.position);
         _currentBehaviour = Behaviour.rushAttack;
         _behaviourChangeTimer = 17 + Random.Range(-5, 5);
     }
 
     void Chill()
-    {
-        _target = null;
+    {       
         _nma.SetDestination(CreateRandomTarget());
         print("chill");
         _nma.speed = _baseSpeed;
